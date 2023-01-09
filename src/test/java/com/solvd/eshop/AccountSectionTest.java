@@ -27,7 +27,7 @@ public class AccountSectionTest {
         homePage.clickAccountMenu();
         homePage.clickLoginButton();
         homePage.clickRegistrationButton();
-        homePage.typeEmail("freppeumeproiffei-9158@yopmail.com");
+        homePage.typeEmail("freppeumeproiffei-9159@yopmail.com");
         homePage.clickContinueButton();
         By newSuccessRegistration = homePage.clickPrivacyButton();
         Assert.assertNotNull(newSuccessRegistration, "Registration isn't completed");
