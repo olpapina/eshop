@@ -13,7 +13,7 @@ public class AccountSectionTest {
     private WebDriver driver;
 
     @BeforeTest
-    public void setupTest() {
+    public void setupBeforeTest() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.get("https://www.21vek.by");
@@ -22,7 +22,7 @@ public class AccountSectionTest {
     }
 
     @Test(testName = "verify that registration success with new email")
-    public void verifyValidRegistrationTest () {
+    public void verifyValidRegistrationTest() {
         HomePage homePage = new HomePage(driver);
         homePage.clickAccountMenu();
         homePage.clickLoginButton();
@@ -31,6 +31,9 @@ public class AccountSectionTest {
         homePage.clickContinueButton();
         By newSuccessRegistration = homePage.clickPrivacyButton();
         Assert.assertNotNull(newSuccessRegistration, "Registration isn't completed");
+    }
+
+    public void setupAfterTest() {
         driver.close();
     }
 }

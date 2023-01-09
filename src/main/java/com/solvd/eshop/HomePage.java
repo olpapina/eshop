@@ -17,7 +17,7 @@ public class HomePage {
     private By privacyButton = By.xpath(("//*[@class='styles_buttons__3IGzu']//*[contains(text(),'Соглашаюсь')]"));
     private By successRegistration = By.cssSelector(".styles_successMessageWrapper__2OOj9");
 
-    public HomePage(WebDriver driver){
+    public HomePage(WebDriver driver) {
         this.driver = driver;
     }
 
@@ -29,7 +29,7 @@ public class HomePage {
         driver.findElement(accountMenuBy).click();
     }
 
-    public void  clickLoginButton() {
+    public void clickLoginButton() {
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
         driver.findElement(loginButtonBy).click();
     }
