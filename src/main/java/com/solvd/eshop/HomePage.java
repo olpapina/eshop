@@ -14,6 +14,8 @@ public class HomePage {
     private By registrationButtonBy = By.xpath("//*[contains(@class,'styles_bottomLinks__349w0')]//*[contains(text(),'Регистрация')]");
     private By emailFieldBy = By.cssSelector(".style_inputStyle__1dvyw");
     private By continueButtonBy = By.cssSelector(".styles_registerButton__18sPZ");
+    private By privacyButton = By.xpath(("//*[@class='styles_buttons__3IGzu']//*[contains(text(),'Соглашаюсь')]"));
+    private By successRegistration = By.cssSelector(".styles_successMessageWrapper__2OOj9");
 
     public HomePage(WebDriver driver){
         this.driver = driver;
@@ -44,5 +46,11 @@ public class HomePage {
     public void clickContinueButton() {
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
         driver.findElement(continueButtonBy).click();
+    }
+
+    public By clickPrivacyButton() {
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
+        driver.findElement(privacyButton).click();
+        return successRegistration;
     }
 }
