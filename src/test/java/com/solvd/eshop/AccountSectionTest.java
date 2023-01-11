@@ -4,26 +4,26 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
-
-import java.time.Duration;
+import org.testng.annotations.*;
 
 public class AccountSectionTest {
 
     WebDriver driver;
-    ConfigFileReader configFileReader;
+//    HomePage homePage;
 
-    @BeforeTest
-    public void setupBeforeTest() {
+//    @BeforeTest
+//    public void setupBeforeTest() {
+//        WebDriverManager.chromedriver().setup();
+//    }
+
+    @BeforeMethod
+    public void setupBeforeMethod() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.get(ConfigFileReader.getData("url"));
-        HomePage homePage = new HomePage(driver);
-        homePage.clickCookieButton();
+//        Home homePage = new HomePage(driver);
+//        homePage.clickCookieButton();
     }
 
     @Test(testName = "verify that registration success with new email")
@@ -32,7 +32,7 @@ public class AccountSectionTest {
         homePage.clickAccountMenu();
         homePage.clickLoginButton();
         homePage.clickRegistrationButton();
-        int num = (int)(Math.random() *9999);
+        int num = (int) (Math.random() * 9999);
         homePage.typeEmail("freppeumeproiffei-" + Integer.toString(num) + "@yopmail.com");
         homePage.clickContinueButton();
         WebElement newSuccessRegistration = homePage.clickPrivacyButton();
@@ -50,10 +50,17 @@ public class AccountSectionTest {
         homePage.clickEnterButton();
         homePage.clickAccountMenuAfterLogin();
         String accountEmail = homePage.getAccountInfo();
-        Assert.assertEquals(accountEmail, "freppeumeproiffei-9147@yopmail.com","Login is failed");
+        Assert.assertEquals(accountEmail, "freppeumeproiffei-9147@yopmail.com", "Login is failed");
     }
 
-    @AfterTest (alwaysRun = true)
+
+//
+//    @AfterMethod(alwaysRun = true)
+//    public void setupAfterMethod() {
+//        driver.close();
+//    }
+//
+    @AfterTest(alwaysRun = true)
     public void setupAfterTest() {
         driver.close();
     }

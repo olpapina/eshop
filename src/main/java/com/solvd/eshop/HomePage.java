@@ -11,7 +11,6 @@ import java.time.Duration;
 
 public class HomePage {
     protected WebDriver driver;
-    private WebDriverWait waiter;
 
     @FindBy(css = ".styles_reactButton__2olKd")
     private WebElement cookieButton;
@@ -39,13 +38,18 @@ public class HomePage {
     private WebElement accountEmail;
     @FindBy (css = ".styles_userTools__2J7cp.undefined")
     private WebElement accountMenuAfterLogin;
-    @FindBy (css = ".styles_catalogButton__1K6kI")
-    private WebElement catalogButton;
+    @FindBy (css = "#catalogSearch")
+    private WebElement searchField;
+    @FindBy (css = ".Search_searchBtn__3fSOy")
+    private WebElement searchButton;
 
     public HomePage(WebDriver driver) {
         this.driver = driver;
-        this.waiter = new WebDriverWait(this.driver,Duration.ofMillis(1000));
         PageFactory.initElements(driver, this);
+    }
+
+    public void waiteIsClickable(long seconds, WebElement webElement) {
+        new WebDriverWait(driver,Duration.ofSeconds(seconds)).until(ExpectedConditions.elementToBeClickable(webElement));
     }
 
     public void clickCookieButton() {
@@ -55,76 +59,89 @@ public class HomePage {
     }
 
     public void clickAccountMenu() {
+        waiteIsClickable(5,accountMenu);
         if (accountMenu.isDisplayed()) {
             accountMenu.click();
         }
     }
 
         public void clickLoginButton() {
-            waiter.until(ExpectedConditions.elementToBeClickable(loginButton));
+            waiteIsClickable(10,loginButton);
             if (loginButton.isDisplayed()) {
                 loginButton.click();
             }
         }
 
     public void clickRegistrationButton() {
-        waiter.until(ExpectedConditions.elementToBeClickable(registrationButton));
+        waiteIsClickable(5,registrationButton);
         if (registrationButton.isDisplayed()) {
             registrationButton.click();
         }
     }
 
     public void typeEmail(String email) {
-        waiter.until(ExpectedConditions.elementToBeClickable(emailField));
-            emailField.sendKeys(email);
+        waiteIsClickable(5,emailField);
+        emailField.sendKeys(email);
     }
 
     public void clickContinueButton() {
-        waiter.until(ExpectedConditions.elementToBeClickable(continueButton));
+        waiteIsClickable(5, continueButton);
         if (continueButton.isDisplayed()) {
             continueButton.click();
         }
     }
 
     public WebElement clickPrivacyButton() {
-        waiter.until(ExpectedConditions.elementToBeClickable(privacyButton));
+        waiteIsClickable(5, privacyButton);
         if (privacyButton.isDisplayed()) {
             privacyButton.click();
         }
-        waiter.until(ExpectedConditions.elementToBeClickable(successRegistration));
+        waiteIsClickable(5, successRegistration);
         return successRegistration;
     }
 
     public void typeLoginEmail(String email) {
-        waiter.until(ExpectedConditions.elementToBeClickable(loginEmail));
+        waiteIsClickable(5, loginEmail);
         if (loginEmail.isDisplayed()) {
             loginEmail.sendKeys(email);
         }
     }
 
     public void typeLoginPassword(String password) {
-        waiter.until(ExpectedConditions.elementToBeClickable(loginPassword));
+        waiteIsClickable(5, loginPassword);
         if (loginPassword.isDisplayed()) {
             loginPassword.sendKeys(password);
         }
     }
 
     public void clickEnterButton() {
-        waiter.until(ExpectedConditions.elementToBeClickable(enterButton));
+        waiteIsClickable(5, enterButton);
         if (enterButton.isDisplayed()) {
             enterButton.click();
         }
     }
 
     public void clickAccountMenuAfterLogin() {
-        waiter.until(ExpectedConditions.elementToBeClickable(accountMenuAfterLogin));
+        waiteIsClickable(10, accountMenuAfterLogin);
         if (accountMenuAfterLogin.isDisplayed()) {
             accountMenuAfterLogin.click();
         }
     }
 
     public String getAccountInfo() {
-        waiter.until(ExpectedConditions.elementToBeClickable(accountEmail));
+        waiteIsClickable(5, accountEmail);
         return accountEmail.getText();
+    }
+
+    public void typeTextInSearch(String string) {
+        waiteIsClickable(5,searchField);
+        searchField.sendKeys(string);
+    }
+
+    public void clickSearchButton() {
+        waiteIsClickable(10, searchButton);
+        if (searchButton.isDisplayed()) {
+            searchButton.click();
+        }
     }
 }
