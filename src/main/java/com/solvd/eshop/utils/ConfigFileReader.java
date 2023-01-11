@@ -1,4 +1,4 @@
-package com.solvd.eshop;
+package com.solvd.eshop.utils;
 
 import java.io.*;
 import java.util.Properties;

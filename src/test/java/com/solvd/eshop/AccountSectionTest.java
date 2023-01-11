@@ -1,7 +1,8 @@
 package com.solvd.eshop;
 
+import com.solvd.eshop.page.*;
+import com.solvd.eshop.utils.ConfigFileReader;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -27,13 +28,13 @@ public class AccountSectionTest {
     public void verifyValidRegistrationTest() {
         HomePage homePage = new HomePage(driver);
         homePage.clickAccountMenu();
-        homePage.clickLoginButton();
-        homePage.clickRegistrationButton();
+        LoginPage loginPage = homePage.clickLoginButton();
+        RegistrationPage registrationPage = loginPage.clickRegistrationButton();
         int num = (int)(Math.random() *9999);
-        homePage.typeEmail("freppeumeproiffei-" + Integer.toString(num) + "@yopmail.com");
-        homePage.clickContinueButton();
-        WebElement newSuccessRegistration = homePage.clickPrivacyButton();
-        String successMessage = newSuccessRegistration.getText();
+        registrationPage.typeEmail("freppeumeproiffei-" + Integer.toString(num) + "@yopmail.com");
+        RegistrationPrivacyPage registrationPrivacyPage = registrationPage.clickContinueButton();
+        SuccessRegistrationPage successRegistrationPage = registrationPrivacyPage.clickPrivacyButton();
+        String successMessage = successRegistrationPage.getSuccessRegistration().getText();
         Assert.assertEquals(successMessage, "Вы зарегистрированы", "Registration success message wasn't displayed");
     }
 
