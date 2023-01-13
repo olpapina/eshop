@@ -3,14 +3,8 @@ package com.solvd.eshop.page;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
-
-public class RegistrationPage {
-    protected WebDriver driver;
+public class RegistrationPage extends AbstractPage {
 
     @FindBy(css = ".style_inputStyle__1dvyw")
     private WebElement emailField;
@@ -19,22 +13,16 @@ public class RegistrationPage {
     private WebElement continueButton;
 
     public RegistrationPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
-    }
-
-    public void waiteIsClickable(long second, WebElement webElement) {
-        new WebDriverWait(this.driver, Duration.ofSeconds(second))
-                .until((ExpectedConditions.elementToBeClickable(webElement)));
+        super(driver);
     }
 
     public void typeEmail(String email) {
-        waiteIsClickable(5, emailField);
+        waitIsClickable(5, emailField);
         emailField.sendKeys(email);
     }
 
     public RegistrationPrivacyPage clickContinueButton() {
-        waiteIsClickable(5, continueButton);
+        waitIsClickable(5, continueButton);
         if (continueButton.isDisplayed()) {
             continueButton.click();
         }

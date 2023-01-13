@@ -1,37 +1,20 @@
 package com.solvd.eshop;
 
 import com.solvd.eshop.page.*;
-import com.solvd.eshop.utils.ConfigFileReader;
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
-public class AccountSectionTest {
-    private static final ThreadLocal<WebDriver> webDriver = new ThreadLocal<>();
-
-    @BeforeTest
-    public void beforeTestSetup() {
-        WebDriverManager.chromedriver().setup();
-    }
-
-    @BeforeMethod
-    public void beforeMethodSetup() {
-        WebDriver driver = new ChromeDriver();
-        driver.get(ConfigFileReader.getData("url"));
-        webDriver.set(driver);
-    }
+public class AccountSectionTest extends AbstractTest {
 
     @Test(testName = "verify that registration success with new email")
     public void verifyValidRegistrationTest() {
-        HomePage homePage = new HomePage(webDriver.get());
+        HomePage homePage = new HomePage(getWebdriver());
         homePage.clickCookieButton();
         homePage.clickAccountMenu();
         LoginPage loginPage = homePage.clickLoginButton();
         RegistrationPage registrationPage = loginPage.clickRegistrationButton();
         int num = (int) (Math.random() * 99999);
-        registrationPage.typeEmail("freppeumeproiffei-" + num + "@yopmail.com");
+        registrationPage.typeEmail("freppeumeproifei-" + num + "@yopmail.com");
         RegistrationPrivacyPage registrationPrivacyPage = registrationPage.clickContinueButton();
         SuccessRegistrationPage successRegistrationPage = registrationPrivacyPage.clickPrivacyButton();
         String successMessage = successRegistrationPage.getSuccessRegistration().getText();
@@ -40,7 +23,7 @@ public class AccountSectionTest {
 
     @Test(testName = "verify enter into account")
     public void verifyEnterIntoAccountTest() {
-        HomePage homePage = new HomePage(webDriver.get());
+        HomePage homePage = new HomePage(getWebdriver());
         homePage.clickCookieButton();
         homePage.clickAccountMenu();
         LoginPage loginPage = homePage.clickLoginButton();
@@ -50,15 +33,5 @@ public class AccountSectionTest {
         homePage.clickAccountMenuAfterLogin();
         String accountEmail = homePage.getAccountInfo();
         Assert.assertEquals(accountEmail, "freppeumeproiffei-9147@yopmail.com", "Login is failed");
-    }
-
-    @AfterMethod(alwaysRun = true)
-    public void afterMethodSetup() {
-        webDriver.get().close();
-    }
-
-    @AfterMethod(alwaysRun = true)
-    public void afterTestSetup() {
-        WebDriverManager.chromedriver().quit();
     }
 }

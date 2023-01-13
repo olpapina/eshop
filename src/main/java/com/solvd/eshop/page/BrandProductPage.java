@@ -4,17 +4,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class BrandProductPage {
-    protected WebDriver driver;
+public class BrandProductPage extends AbstractPage {
 
     @FindBy(css = ".result__link j-ga_track .result__name")
     List<WebElement> brandProducts;
@@ -23,13 +20,7 @@ public class BrandProductPage {
     List<WebElement> productPrices;
 
     public BrandProductPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
-    }
-
-    public void waiteIsClickable(long second, WebElement webElement) {
-        new WebDriverWait(this.driver, Duration.ofSeconds(second))
-                .until((ExpectedConditions.elementToBeClickable(webElement)));
+        super(driver);
     }
 
     public List<String> getFullNames() {

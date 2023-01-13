@@ -6,50 +6,32 @@ import com.solvd.eshop.page.ProductPage;
 import com.solvd.eshop.page.HomePage;
 import com.solvd.eshop.page.ResultPage;
 import com.solvd.eshop.elements.SearchSection;
-import com.solvd.eshop.utils.ConfigFileReader;
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
 
 import java.util.List;
 
-public class SearchTest {
-    private static final ThreadLocal<WebDriver> webDriver = new ThreadLocal<>();
-
+public class SearchTest extends AbstractTest {
     @DataProvider(name = "productBrandData")
     public Object[][] dataBrand() {
         return new Object[][]{
-                {"Холодильники", "LG"}
+                {"Холодильники", "LG"},
+                {"Пылесосы", "Karcher"}
         };
     }
 
     @DataProvider(name = "productPrice")
     public Object[][] dataPrice() {
         return new Object[][]{
-                {"Смартфоны", "400", "450"},
-                {"Пылесосы", "700", "800"}
+                {"Смартфоны", "400", "450"}
         };
-    }
-
-    @BeforeTest
-    public void beforeTestSetup() {
-        WebDriverManager.chromedriver().setup();
-    }
-
-    @BeforeMethod
-    public void beforeMethodSetup() {
-        WebDriver driver = new ChromeDriver();
-        driver.get(ConfigFileReader.getData("url"));
-        webDriver.set(driver);
     }
 
     @Test(testName = "verify that results contains input text")
     public void verifySearchTextTypeResultsTest() {
-        HomePage homePage = new HomePage(webDriver.get());
+        HomePage homePage = new HomePage(getWebdriver());
         homePage.clickCookieButton();
-        SearchSection searchSection = new SearchSection(webDriver.get());
+        SearchSection searchSection = new SearchSection(getWebdriver());
         String inputText = "Ломтерезка";
         searchSection.typeTextInSearch(inputText);
         ResultPage resultPage = searchSection.clickSearchButton();
@@ -62,9 +44,9 @@ public class SearchTest {
 
     @Test(testName = "verify advance search that product brand will be found in results", dataProvider = "productBrandData")
     public void verifyAdvanceSearchItemBrandTest(String product, String brand) {
-        HomePage homePage = new HomePage(webDriver.get());
+        HomePage homePage = new HomePage(getWebdriver());
         homePage.clickCookieButton();
-        ProductMenuBar productMenuBar = new ProductMenuBar(webDriver.get());
+        ProductMenuBar productMenuBar = new ProductMenuBar(getWebdriver());
         ProductPage productPage = productMenuBar.selectProduct(product);
         productPage.selectCheckbox(brand);
         BrandProductPage brandProductPage = productPage.clickShowProductsButton();
@@ -77,9 +59,9 @@ public class SearchTest {
 
     @Test(testName = "verify advance search that product price in selected interval", dataProvider = "productPrice")
     public void verifyAdvanceSearchPriceOfResultTest(String product, String minPrice, String maxPrice) {
-        HomePage homePage = new HomePage(webDriver.get());
+        HomePage homePage = new HomePage(getWebdriver());
         homePage.clickCookieButton();
-        ProductMenuBar productMenuBar = new ProductMenuBar(webDriver.get());
+        ProductMenuBar productMenuBar = new ProductMenuBar(getWebdriver());
         ProductPage productPage = productMenuBar.selectProduct(product);
         productPage.typeMinPriceField(minPrice);
         productPage.typeMaxPriceField(maxPrice);
@@ -93,15 +75,5 @@ public class SearchTest {
             sa.assertTrue(price < Double.parseDouble(maxPrice), "The result price more maximum price");
         });
         sa.assertAll();
-    }
-
-    @AfterMethod(alwaysRun = true)
-    public void afterMethodSetup() {
-        webDriver.get().close();
-    }
-
-    @AfterMethod(alwaysRun = true)
-    public void afterTestSetup() {
-        WebDriverManager.chromedriver().quit();
     }
 }

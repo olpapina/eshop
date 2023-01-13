@@ -3,14 +3,8 @@ package com.solvd.eshop.page;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
-
-public class LoginPage {
-    protected WebDriver driver;
+public class LoginPage extends AbstractPage {
 
     @FindBy(xpath = "//*[contains(@class,'styles_bottomLinks__349w0')]//*[contains(text(),'Регистрация')]")
     private WebElement registrationButton;
@@ -24,19 +18,12 @@ public class LoginPage {
     @FindBy(css = ".style_actions__2mIsz .style_baseActionButton__2LQYJ ")
     private WebElement enterButton;
 
-
     public LoginPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
-    }
-
-    public void waiteIsClickable(long second, WebElement webElement) {
-        new WebDriverWait(this.driver, Duration.ofSeconds(second))
-                .until((ExpectedConditions.elementToBeClickable(webElement)));
+        super(driver);
     }
 
     public RegistrationPage clickRegistrationButton() {
-        waiteIsClickable(5, registrationButton);
+        waitIsClickable(5, registrationButton);
         if (registrationButton.isDisplayed()) {
             registrationButton.click();
         }
@@ -44,17 +31,17 @@ public class LoginPage {
     }
 
     public void typeLoginEmail(String email) {
-        waiteIsClickable(5, emailField);
+        waitIsClickable(5, emailField);
         emailField.sendKeys(email);
     }
 
     public void typeLoginPassword(String password) {
-        waiteIsClickable(5, passwordField);
+        waitIsClickable(5, passwordField);
         passwordField.sendKeys(password);
     }
 
     public HomePage clickEnterButton() {
-        waiteIsClickable(5, enterButton);
+        waitIsClickable(5, enterButton);
         if (enterButton.isDisplayed()) {
             enterButton.click();
         }

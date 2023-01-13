@@ -9,24 +9,16 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class SuccessRegistrationPage {
-    protected WebDriver driver;
-
+public class SuccessRegistrationPage extends AbstractPage {
     @FindBy(css = ".styles_successTitle__1IDi2")
     private WebElement successRegistration;
 
     public SuccessRegistrationPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
-    }
-
-    public void waiteIsClickable(long second, WebElement webElement) {
-        new WebDriverWait(this.driver, Duration.ofSeconds(second))
-                .until((ExpectedConditions.elementToBeClickable(webElement)));
+        super(driver);
     }
 
     public WebElement getSuccessRegistration() {
-        waiteIsClickable(5, successRegistration);
+        waitIsClickable(5, successRegistration);
         return successRegistration;
     }
 }

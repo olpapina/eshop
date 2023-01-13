@@ -11,9 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.List;
 
-public class ProductPage {
-    protected WebDriver driver;
-
+public class ProductPage extends AbstractPage {
     @FindBy(css = ".l-filter b-sidebar")
     WebElement sideBar;
 
@@ -33,19 +31,7 @@ public class ProductPage {
     WebElement maxPriceField;
 
     public ProductPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
-    }
-
-    public void waiteVisibility(long second, WebElement webElement) {
-        new WebDriverWait(this.driver, Duration.ofSeconds(second))
-                .until(ExpectedConditions.visibilityOf(webElement));
-    }
-
-
-    public void waiteIsClickable(long second, WebElement webElement) {
-        new WebDriverWait(this.driver, Duration.ofSeconds(second))
-                .until((ExpectedConditions.elementToBeClickable(webElement)));
+        super(driver);
     }
 
     public void selectCheckbox(String brand) {
@@ -54,23 +40,23 @@ public class ProductPage {
                 .findFirst()
                 .orElseThrow();
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", requiredCheckbox);
-        waiteIsClickable(10, requiredCheckbox);
+        waitIsClickable(10, requiredCheckbox);
         requiredCheckbox.click();
     }
 
     public BrandProductPage clickShowProductsButton() {
-        waiteIsClickable(30, showProductsButton);
+        waitIsClickable(30, showProductsButton);
         showProductsButton.click();
         return new BrandProductPage(driver);
     }
 
     public void typeMinPriceField(String minPrice) {
-        waiteIsClickable(10, minPriceField);
+        waitIsClickable(10, minPriceField);
         minPriceField.sendKeys(minPrice);
     }
 
     public void typeMaxPriceField(String maxPrice) {
-        waiteIsClickable(10, maxPriceField);
+        waitIsClickable(10, maxPriceField);
         maxPriceField.sendKeys(maxPrice);
     }
 }
