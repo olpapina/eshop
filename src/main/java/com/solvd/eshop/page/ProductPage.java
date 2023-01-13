@@ -41,22 +41,22 @@ public class ProductPage extends AbstractPage {
                 .orElseThrow();
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", requiredCheckbox);
         waitIsClickable(10, requiredCheckbox);
-        requiredCheckbox.click();
+        elementClick(requiredCheckbox);
     }
 
     public BrandProductPage clickShowProductsButton() {
         waitIsClickable(30, showProductsButton);
-        showProductsButton.click();
+        elementClick(showProductsButton);
         return new BrandProductPage(driver);
     }
 
     public void typeMinPriceField(String minPrice) {
         waitIsClickable(10, minPriceField);
-        minPriceField.sendKeys(minPrice);
+        typeText(minPriceField,minPrice);
     }
 
     public void typeMaxPriceField(String maxPrice) {
         waitIsClickable(10, maxPriceField);
-        maxPriceField.sendKeys(maxPrice);
+        typeText(maxPriceField,maxPrice);
     }
 }

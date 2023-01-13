@@ -19,13 +19,13 @@ public class SearchSection extends AbstractPage {
 
     public void typeTextInSearch(String searchText) {
         waitIsClickable(5, searchField);
-        searchField.sendKeys(searchText);
+        typeText(searchField, searchText);
     }
 
     public ResultPage clickSearchButton() {
         waitIsClickable(5, searchButton);
         if (searchButton.isDisplayed()) {
-            searchButton.click();
+            elementClick(searchButton);
         }
         return new ResultPage(driver);
     }

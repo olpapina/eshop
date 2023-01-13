@@ -27,20 +27,20 @@ public class HomePage extends AbstractPage{
 
     public void clickCookieButton() {
         if (cookieButton.isDisplayed()) {
-            cookieButton.click();
+            elementClick(cookieButton);
         }
     }
 
     public void clickAccountMenu() {
         if (accountMenu.isDisplayed()) {
-            accountMenu.click();
+            elementClick(accountMenu);
         }
     }
 
     public LoginPage clickLoginButton() {
         waitIsClickable(5, loginButton);
         if (loginButton.isDisplayed()) {
-            loginButton.click();
+            elementClick(loginButton);
         }
         return new LoginPage(driver);
     }
@@ -48,7 +48,7 @@ public class HomePage extends AbstractPage{
     public void clickAccountMenuAfterLogin() {
         waitIsClickable(5, accountMenuAfterLogin);
         if (accountMenuAfterLogin.isDisplayed()) {
-            accountMenuAfterLogin.click();
+            elementClick(accountMenuAfterLogin);
         }
     }
 

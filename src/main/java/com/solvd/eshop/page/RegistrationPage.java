@@ -18,13 +18,13 @@ public class RegistrationPage extends AbstractPage {
 
     public void typeEmail(String email) {
         waitIsClickable(5, emailField);
-        emailField.sendKeys(email);
+        typeText(emailField, email);
     }
 
     public RegistrationPrivacyPage clickContinueButton() {
         waitIsClickable(5, continueButton);
         if (continueButton.isDisplayed()) {
-            continueButton.click();
+            elementClick(continueButton);
         }
         return new RegistrationPrivacyPage(driver);
     }

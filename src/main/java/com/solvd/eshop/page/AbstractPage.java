@@ -20,4 +20,12 @@ public abstract class AbstractPage {
         new WebDriverWait(this.driver, Duration.ofSeconds(second))
                 .until((ExpectedConditions.elementToBeClickable(webElement)));
     }
+
+    public void elementClick(WebElement webElement) {
+        webElement.click();
+    }
+
+    public void typeText(WebElement element, String text) {
+        element.sendKeys(text);
+    }
 }
