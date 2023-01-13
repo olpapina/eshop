@@ -11,20 +11,23 @@ import java.time.Duration;
 
 public class RegistrationPrivacyPage {
     protected WebDriver driver;
-    private WebDriverWait waiter;
 
     @FindBy(xpath = "//*[@class='styles_buttons__3IGzu']//*[contains(text(),'Соглашаюсь')]")
     private WebElement privacyButton;
 
     public RegistrationPrivacyPage(WebDriver driver) {
         this.driver = driver;
-        this.waiter = new WebDriverWait(this.driver, Duration.ofMillis(1000));
         PageFactory.initElements(driver, this);
+    }
+
+    public void waiteIsClickable(long second, WebElement webElement) {
+        new WebDriverWait(this.driver, Duration.ofSeconds(second))
+                .until((ExpectedConditions.elementToBeClickable(webElement)));
     }
 
     public SuccessRegistrationPage clickPrivacyButton() {
         SuccessRegistrationPage successRegistrationPage = new SuccessRegistrationPage(driver);
-        waiter.until(ExpectedConditions.elementToBeClickable(privacyButton));
+        waiteIsClickable(5, privacyButton);
         if (privacyButton.isDisplayed()) {
             privacyButton.click();
         }

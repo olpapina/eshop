@@ -11,20 +11,22 @@ import java.time.Duration;
 
 public class SuccessRegistrationPage {
     protected WebDriver driver;
-    private WebDriverWait waiter;
 
     @FindBy(css = ".styles_successTitle__1IDi2")
     private WebElement successRegistration;
 
     public SuccessRegistrationPage(WebDriver driver) {
         this.driver = driver;
-        this.waiter = new WebDriverWait(this.driver, Duration.ofMillis(1000));
         PageFactory.initElements(driver, this);
     }
 
-    public WebElement getSuccessRegistration() {
-        waiter.until(ExpectedConditions.elementToBeClickable(successRegistration));
-        return successRegistration;
+    public void waiteIsClickable(long second, WebElement webElement) {
+        new WebDriverWait(this.driver, Duration.ofSeconds(second))
+                .until((ExpectedConditions.elementToBeClickable(webElement)));
     }
 
+    public WebElement getSuccessRegistration() {
+        waiteIsClickable(5, successRegistration);
+        return successRegistration;
+    }
 }

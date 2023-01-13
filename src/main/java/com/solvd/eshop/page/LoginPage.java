@@ -11,22 +11,53 @@ import java.time.Duration;
 
 public class LoginPage {
     protected WebDriver driver;
-    private WebDriverWait waiter;
 
     @FindBy(xpath = "//*[contains(@class,'styles_bottomLinks__349w0')]//*[contains(text(),'Регистрация')]")
     private WebElement registrationButton;
 
+    @FindBy(css = "#login-email")
+    private WebElement emailField;
+
+    @FindBy(css = "#login-password")
+    private WebElement passwordField;
+
+    @FindBy(css = ".style_actions__2mIsz .style_baseActionButton__2LQYJ ")
+    private WebElement enterButton;
+
+
     public LoginPage(WebDriver driver) {
         this.driver = driver;
-        this.waiter = new WebDriverWait(this.driver, Duration.ofMillis(1000));
         PageFactory.initElements(driver, this);
     }
 
+    public void waiteIsClickable(long second, WebElement webElement) {
+        new WebDriverWait(this.driver, Duration.ofSeconds(second))
+                .until((ExpectedConditions.elementToBeClickable(webElement)));
+    }
+
     public RegistrationPage clickRegistrationButton() {
-        waiter.until(ExpectedConditions.elementToBeClickable(registrationButton));
+        waiteIsClickable(5, registrationButton);
         if (registrationButton.isDisplayed()) {
             registrationButton.click();
         }
         return new RegistrationPage(driver);
+    }
+
+    public void typeLoginEmail(String email) {
+        waiteIsClickable(5, emailField);
+        emailField.sendKeys(email);
+    }
+
+    public void typeLoginPassword(String password) {
+        waiteIsClickable(5, passwordField);
+        passwordField.sendKeys(password);
+    }
+
+    public HomePage clickEnterButton() {
+        waiteIsClickable(5, enterButton);
+        if (enterButton.isDisplayed()) {
+            enterButton.click();
+        }
+        return new HomePage(driver);
     }
 }
