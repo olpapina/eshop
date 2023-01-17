@@ -1,14 +1,28 @@
 <?xml version = "1.0" encoding = "UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name = "Verify 21vek.by" parallel="methods" thread-count="8">
+<suite name = "Verify 21vek.by" parallel="tests" thread-count="2">
 
-    <test name = "Account section test">
+    <test name = "ChromeTest - Account section test" parallel="methods" thread-count="2">
+        <parameter name="browser" value="chrome"/>
         <classes>
             <class name = "com.solvd.eshop.AccountSectionTest" />
         </classes>
     </test>
-    <test name = "Search test">
+    <test name = "ChromeTest - Search test" parallel="methods" thread-count="4">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name = "com.solvd.eshop.SearchTest" />
+        </classes>
+    </test>
+    <test name = "FirefoxTest - Account section test" parallel="methods" thread-count="2">
+        <parameter name="browser" value="firefox"/>
+        <classes>
+            <class name = "com.solvd.eshop.AccountSectionTest" />
+        </classes>
+    </test>
+    <test name = "FirefoxTest - Search test" parallel="methods" thread-count="4">
+        <parameter name="browser" value="firefox"/>
         <classes>
             <class name = "com.solvd.eshop.SearchTest" />
         </classes>
