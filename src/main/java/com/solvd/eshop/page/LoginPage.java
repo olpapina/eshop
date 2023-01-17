@@ -23,27 +23,23 @@ public class LoginPage extends AbstractPage {
     }
 
     public RegistrationPage clickRegistrationButton() {
-        waitIsClickable(5, registrationButton);
         if (registrationButton.isDisplayed()) {
-            elementClick(registrationButton);
+            elementClick(registrationButton, 5);
         }
         return new RegistrationPage(driver);
     }
 
     public void typeLoginEmail(String email) {
-        waitIsClickable(5, emailField);
-        typeText(emailField,email);
+        typeText(emailField,email, 5);
     }
 
     public void typeLoginPassword(String password) {
-        waitIsClickable(5, passwordField);
-        typeText(passwordField,password);
+        typeText(passwordField,password, 5);
     }
 
     public HomePage clickEnterButton() {
-        waitIsClickable(5, enterButton);
         if (enterButton.isDisplayed()) {
-            elementClick(enterButton);
+            elementClick(enterButton, 5);
         }
         return new HomePage(driver);
     }
