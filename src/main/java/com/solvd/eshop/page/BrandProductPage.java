@@ -27,14 +27,14 @@ public class BrandProductPage extends AbstractPage {
         new WebDriverWait(this.driver, Duration.ofSeconds(30))
                 .until((ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector(".result__name"))));
         return brandProducts.stream()
-                .map(WebElement::getText).collect(Collectors.toList());
+                .map(this::getElementText).collect(Collectors.toList());
     }
 
     public List<String> getResultPrices() {
         new WebDriverWait(this.driver, Duration.ofSeconds(30))
                 .until((ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector(".result__name"))));
         return productPrices.stream()
-                .map(WebElement::getText).collect(Collectors.toList());
+                .map(this::getElementText).collect(Collectors.toList());
     }
 
     public List<Double> getPrices(List<String> resultPrices) {

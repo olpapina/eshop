@@ -52,6 +52,6 @@ public class HomePage extends AbstractPage{
 
     public String getAccountInfo() {
         waitIsClickable(5, userToolsTitle);
-        return userToolsTitle.getText();
+        return getElementText(userToolsTitle);
     }
 }

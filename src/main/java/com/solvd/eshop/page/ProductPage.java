@@ -32,7 +32,7 @@ public class ProductPage extends AbstractPage {
 
     public void selectCheckbox(String brand) {
         WebElement requiredCheckbox = checkboxes.stream()
-                .filter(checkbox -> checkbox.getText().equals(brand))
+                .filter(checkbox -> getElementText(checkbox).equals(brand))
                 .findFirst()
                 .orElseThrow();
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", requiredCheckbox);

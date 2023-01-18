@@ -37,4 +37,8 @@ public abstract class AbstractPage {
         webElement.sendKeys(text);
         LOGGER.info("in the "+ webElement.getAccessibleName() + "text" + text + "was typed");
     }
+
+    public String getElementText(WebElement webElement) {
+        return webElement.getText();
+    }
 }

@@ -17,7 +17,7 @@ public class ResultPage extends AbstractPage {
 
     public List<String> getFullNames() {
         return searchResultItems.stream()
-                .map(WebElement::getText)
+                .map(this::getElementText)
                 .collect(Collectors.toList());
     }
 }
