@@ -1,5 +1,6 @@
 package com.solvd.eshop.elements;
 
+import com.solvd.eshop.page.AbstractPage;
 import com.solvd.eshop.page.ProductPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -7,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public class ProductMenuBar extends ProductPage {
+public class ProductMenuBar extends AbstractPage {
 
     @FindBy(css = ".styles_promoItem__3H-t7")
     private List<WebElement> itemProducts;
@@ -22,7 +23,7 @@ public class ProductMenuBar extends ProductPage {
                 .findFirst()
                 .orElseThrow();
         waitIsClickable(20, requiredProduct);
-        requiredProduct.click();
+        elementClick(requiredProduct);
         return new ProductPage(driver);
     }
 }
