@@ -9,22 +9,22 @@ import java.util.List;
 
 public class ProductPage extends AbstractPage {
     @FindBy(css = ".l-filter b-sidebar")
-    WebElement sideBar;
+    private WebElement sideBar;
 
     @FindBy(xpath = "//*[contains(@class,'filter__attrs cr-filter__producers')]//*[contains(@class,'j-plus__toggle g-pseudo_href')]")
-    WebElement showAll;
+    private WebElement showAll;
 
     @FindBy(xpath = "//*[contains(@class, 'filter__attrs cr-filter__producers')]//*[@class='filter-attr__value']")
-    List<WebElement> checkboxes;
+    private List<WebElement> checkboxes;
 
     @FindBy(css = "#j-filter__btn")
-    WebElement showProductsButton;
+    private WebElement showProductsButton;
 
     @FindBy(xpath = "//*[contains(@class,'cr-filter__price')]//*[@class='g-form__inputwrap']//*[@name='filter[price][from]']")
-    WebElement minPriceField;
+    private WebElement minPriceField;
 
     @FindBy(xpath = "//*[contains(@class,'cr-filter__price')]//*[@class='g-form__inputwrap']//*[@name='filter[price][to]']")
-    WebElement maxPriceField;
+    private WebElement maxPriceField;
 
     public ProductPage(WebDriver driver) {
         super(driver);
@@ -45,10 +45,10 @@ public class ProductPage extends AbstractPage {
     }
 
     public void typeMinPriceField(String minPrice) {
-        typeText(minPriceField,minPrice, 10);
+        typeText(minPriceField, minPrice, 10);
     }
 
     public void typeMaxPriceField(String maxPrice) {
-        typeText(maxPriceField,maxPrice, 10);
+        typeText(maxPriceField, maxPrice, 10);
     }
 }

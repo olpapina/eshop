@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class ResultPage extends AbstractPage {
     @FindBy(css = ".result__name")
-    List<WebElement> searchResultItems;
+    private List<WebElement> searchResultItems;
 
     public ResultPage(WebDriver driver) {
         super(driver);

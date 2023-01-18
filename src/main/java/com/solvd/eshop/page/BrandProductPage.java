@@ -14,10 +14,10 @@ import java.util.stream.Collectors;
 public class BrandProductPage extends AbstractPage {
 
     @FindBy(css = ".result__link j-ga_track .result__name")
-    List<WebElement> brandProducts;
+    private List<WebElement> brandProducts;
 
     @FindBy(xpath = "//*[contains(@class,'cr-result__full')]//*[contains(@class,'result__price')]//*[contains(@class,'j-item-data')]")
-    List<WebElement> productPrices;
+    private List<WebElement> productPrices;
 
     public BrandProductPage(WebDriver driver) {
         super(driver);
@@ -39,7 +39,7 @@ public class BrandProductPage extends AbstractPage {
 
     public List<Double> getPrices(List<String> resultPrices) {
         List<String> newResultPrices = resultPrices.stream()
-                .map(price-> price.replace(',','.'))
+                .map(price -> price.replace(',', '.'))
                 .collect(Collectors.toList());
         return newResultPrices.stream()
                 .map(Double::parseDouble)

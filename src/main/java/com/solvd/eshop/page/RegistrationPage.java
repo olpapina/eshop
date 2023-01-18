@@ -21,9 +21,7 @@ public class RegistrationPage extends AbstractPage {
     }
 
     public RegistrationPrivacyPage clickContinueButton() {
-        if (continueButton.isDisplayed()) {
-            elementClick(continueButton, 5);
-        }
+        elementClick(continueButton, 5);
         return new RegistrationPrivacyPage(driver);
     }
 }

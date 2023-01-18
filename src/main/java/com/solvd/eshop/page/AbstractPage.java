@@ -27,15 +27,19 @@ public abstract class AbstractPage {
     public void elementClick(WebElement webElement, long second) {
         new WebDriverWait(this.driver, Duration.ofSeconds(second))
                 .until((ExpectedConditions.elementToBeClickable(webElement)));
-        webElement.click();
-        LOGGER.info(webElement.getTagName()+ " was clicked");
+        if (webElement.isDisplayed()) {
+            webElement.click();
+            LOGGER.info(webElement.getTagName() + " is clicked");
+        } else {
+            LOGGER.info(webElement.getTagName() + " isn't clicked");
+        }
     }
 
     public void typeText(WebElement webElement, String text, long second) {
         new WebDriverWait(this.driver, Duration.ofSeconds(second))
                 .until((ExpectedConditions.elementToBeClickable(webElement)));
         webElement.sendKeys(text);
-        LOGGER.info("in the "+ webElement.getAccessibleName() + "text" + text + "was typed");
+        LOGGER.info("in the " + webElement.getAccessibleName() + "text" + text + "was typed");
     }
 
     public String getElementText(WebElement webElement) {

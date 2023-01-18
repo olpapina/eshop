@@ -15,9 +15,7 @@ public class RegistrationPrivacyPage extends AbstractPage {
 
     public SuccessRegistrationPage clickPrivacyButton() {
         SuccessRegistrationPage successRegistrationPage = new SuccessRegistrationPage(driver);
-        if (privacyButton.isDisplayed()) {
-            elementClick(privacyButton, 5);
-        }
+        elementClick(privacyButton, 5);
         return successRegistrationPage;
     }
 }
