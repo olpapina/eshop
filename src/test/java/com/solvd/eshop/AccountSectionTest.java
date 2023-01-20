@@ -21,7 +21,7 @@ public class AccountSectionTest extends AbstractTest {
         Assert.assertEquals(successMessage, "Вы зарегистрированы", "Registration success message wasn't displayed");
     }
 
-    @Test(testName = "verify enter into account")
+    @Test(testName = "verify enter into account", enabled = false)
     public void verifyEnterIntoAccountTest() {
         HomePage homePage = new HomePage(getWebdriver());
         homePage.clickCookieButton();

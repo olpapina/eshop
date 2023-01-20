@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class HomePage extends AbstractPage {
 
-    @FindBy(css = ".styles_reactButton__2olKd")
+    @FindBy(xpath = "//*[contains(@class,'styles_primaryButton__30pEq')]")
     private WebElement cookieButton;
 
     @FindBy(css = ".styles_userToolsToggler__imcSl")
@@ -26,11 +26,11 @@ public class HomePage extends AbstractPage {
     }
 
     public void clickCookieButton() {
-        elementClick(cookieButton, 0);
+        elementClick(cookieButton, 5);
     }
 
     public void clickAccountMenu() {
-        elementClick(accountMenu, 0);
+        elementClick(accountMenu, 5);
     }
 
     public LoginPage clickLoginButton() {

@@ -49,7 +49,7 @@ public abstract class AbstractTest {
     public void afterMethodSetup(ITestResult result) throws Exception {
         if (result.getStatus()==ITestResult.FAILURE) {
             LOGGER.error(result.getName()+ " is failed");
-            takeSnapShot(webDriver.get(), "/Users/solvd/IdeaProjects/eshop/screenshots/");
+            takeSnapShot(webDriver.get(), "./eshop/screenshots/");
         }
         webDriver.get().close();
     }

@@ -21,12 +21,12 @@ public abstract class AbstractPage {
 
     public void waitIsClickable(long second, WebElement webElement) {
         new WebDriverWait(this.driver, Duration.ofSeconds(second))
-                .until((ExpectedConditions.elementToBeClickable(webElement)));
+                .until(ExpectedConditions.elementToBeClickable(webElement));
     }
 
     public void elementClick(WebElement webElement, long second) {
         new WebDriverWait(this.driver, Duration.ofSeconds(second))
-                .until((ExpectedConditions.elementToBeClickable(webElement)));
+                .until(ExpectedConditions.elementToBeClickable(webElement));
         if (webElement.isDisplayed()) {
             webElement.click();
             LOGGER.info(webElement.getTagName() + " is clicked");
