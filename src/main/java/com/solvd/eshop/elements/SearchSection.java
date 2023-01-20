@@ -23,9 +23,7 @@ public class SearchSection extends AbstractPage {
     }
 
     public ResultPage clickSearchButton() {
-        if (searchButton.isDisplayed()) {
-            elementClick(searchButton, 5);
-        }
+        elementClick(searchButton, 5);
         return new ResultPage(driver);
     }
 }

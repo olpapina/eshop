@@ -31,7 +31,7 @@ public abstract class AbstractPage {
             webElement.click();
             LOGGER.info(webElement.getTagName() + " is clicked");
         } else {
-            LOGGER.info(webElement.getTagName() + " isn't clicked");
+            LOGGER.error(webElement.getTagName() + " isn't clicked");
         }
     }
 
