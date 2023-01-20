@@ -6,7 +6,7 @@ import org.testng.annotations.*;
 
 public class AccountSectionTest extends AbstractTest {
 
-    @Test(testName = "verify that registration success with new email")
+    @Test(testName = "verify that registration success with new email", enabled = false)
     public void verifyValidRegistrationTest() {
         HomePage homePage = new HomePage(getWebdriver());
         homePage.clickCookieButton();

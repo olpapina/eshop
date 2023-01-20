@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class HomePage extends AbstractPage{
+public class HomePage extends AbstractPage {
 
     @FindBy(css = ".styles_reactButton__2olKd")
     private WebElement cookieButton;
@@ -15,7 +15,7 @@ public class HomePage extends AbstractPage{
     @FindBy(css = ".userToolsBtn")
     private WebElement loginButton;
 
-    @FindBy (css = ".styles_userTools__2J7cp.undefined")
+    @FindBy(css = ".styles_userTools__2J7cp.undefined")
     private WebElement accountMenuAfterLogin;
 
     @FindBy(css = ".userToolsSubtitle")
@@ -26,34 +26,24 @@ public class HomePage extends AbstractPage{
     }
 
     public void clickCookieButton() {
-        if (cookieButton.isDisplayed()) {
-            elementClick(cookieButton);
-        }
+        elementClick(cookieButton, 0);
     }
 
     public void clickAccountMenu() {
-        if (accountMenu.isDisplayed()) {
-            elementClick(accountMenu);
-        }
+        elementClick(accountMenu, 0);
     }
 
     public LoginPage clickLoginButton() {
-        waitIsClickable(5, loginButton);
-        if (loginButton.isDisplayed()) {
-            elementClick(loginButton);
-        }
+        elementClick(loginButton, 5);
         return new LoginPage(driver);
     }
 
     public void clickAccountMenuAfterLogin() {
-        waitIsClickable(5, accountMenuAfterLogin);
-        if (accountMenuAfterLogin.isDisplayed()) {
-            elementClick(accountMenuAfterLogin);
-        }
+        elementClick(accountMenuAfterLogin, 5);
     }
 
     public String getAccountInfo() {
         waitIsClickable(5, userToolsTitle);
-        return userToolsTitle.getText();
+        return getElementText(userToolsTitle);
     }
 }

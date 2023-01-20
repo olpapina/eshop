@@ -1,5 +1,7 @@
 package com.solvd.eshop.page;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -9,6 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public abstract class AbstractPage {
+    private static final Logger LOGGER = LogManager.getLogger(AbstractPage.class);
     protected WebDriver driver;
 
     public AbstractPage(WebDriver driver) {
@@ -21,11 +24,25 @@ public abstract class AbstractPage {
                 .until((ExpectedConditions.elementToBeClickable(webElement)));
     }
 
-    public void elementClick(WebElement webElement) {
-        webElement.click();
+    public void elementClick(WebElement webElement, long second) {
+        new WebDriverWait(this.driver, Duration.ofSeconds(second))
+                .until((ExpectedConditions.elementToBeClickable(webElement)));
+        if (webElement.isDisplayed()) {
+            webElement.click();
+            LOGGER.info(webElement.getTagName() + " is clicked");
+        } else {
+            LOGGER.error(webElement.getTagName() + " isn't clicked");
+        }
     }
 
-    public void typeText(WebElement element, String text) {
-        element.sendKeys(text);
+    public void typeText(WebElement webElement, String text, long second) {
+        new WebDriverWait(this.driver, Duration.ofSeconds(second))
+                .until((ExpectedConditions.elementToBeClickable(webElement)));
+        webElement.sendKeys(text);
+        LOGGER.info("in the " + webElement.getAccessibleName() + "text" + text + "was typed");
+    }
+
+    public String getElementText(WebElement webElement) {
+        return webElement.getText();
     }
 }

@@ -4,11 +4,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
 import java.util.List;
 
 public class ProductPage extends AbstractPage {
@@ -36,27 +32,23 @@ public class ProductPage extends AbstractPage {
 
     public void selectCheckbox(String brand) {
         WebElement requiredCheckbox = checkboxes.stream()
-                .filter(checkbox -> checkbox.getText().equals(brand))
+                .filter(checkbox -> getElementText(checkbox).equals(brand))
                 .findFirst()
                 .orElseThrow();
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", requiredCheckbox);
-        waitIsClickable(10, requiredCheckbox);
-        elementClick(requiredCheckbox);
+        elementClick(requiredCheckbox, 10);
     }
 
     public BrandProductPage clickShowProductsButton() {
-        waitIsClickable(30, showProductsButton);
-        elementClick(showProductsButton);
+        elementClick(showProductsButton, 20);
         return new BrandProductPage(driver);
     }
 
     public void typeMinPriceField(String minPrice) {
-        waitIsClickable(10, minPriceField);
-        typeText(minPriceField,minPrice);
+        typeText(minPriceField, minPrice, 10);
     }
 
     public void typeMaxPriceField(String maxPrice) {
-        waitIsClickable(10, maxPriceField);
-        typeText(maxPriceField,maxPrice);
+        typeText(maxPriceField, maxPrice, 10);
     }
 }

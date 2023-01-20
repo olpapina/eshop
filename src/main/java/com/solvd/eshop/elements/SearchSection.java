@@ -18,15 +18,12 @@ public class SearchSection extends AbstractPage {
     }
 
     public void typeTextInSearch(String searchText) {
-        waitIsClickable(5, searchField);
-        typeText(searchField, searchText);
+
+        typeText(searchField, searchText, 5);
     }
 
     public ResultPage clickSearchButton() {
-        waitIsClickable(5, searchButton);
-        if (searchButton.isDisplayed()) {
-            elementClick(searchButton);
-        }
+        elementClick(searchButton, 5);
         return new ResultPage(driver);
     }
 }

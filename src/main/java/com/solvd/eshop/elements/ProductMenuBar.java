@@ -19,11 +19,10 @@ public class ProductMenuBar extends AbstractPage {
 
     public ProductPage selectProduct(String productName) {
         WebElement requiredProduct = itemProducts.stream()
-                .filter(product -> product.getText().equals(productName))
+                .filter(product -> getElementText(product).equals(productName))
                 .findFirst()
                 .orElseThrow();
-        waitIsClickable(20, requiredProduct);
-        elementClick(requiredProduct);
+        elementClick(requiredProduct, 5);
         return new ProductPage(driver);
     }
 }

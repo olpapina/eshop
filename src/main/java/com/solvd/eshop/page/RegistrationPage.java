@@ -17,15 +17,11 @@ public class RegistrationPage extends AbstractPage {
     }
 
     public void typeEmail(String email) {
-        waitIsClickable(5, emailField);
-        typeText(emailField, email);
+        typeText(emailField, email, 5);
     }
 
     public RegistrationPrivacyPage clickContinueButton() {
-        waitIsClickable(5, continueButton);
-        if (continueButton.isDisplayed()) {
-            elementClick(continueButton);
-        }
+        elementClick(continueButton, 5);
         return new RegistrationPrivacyPage(driver);
     }
 }

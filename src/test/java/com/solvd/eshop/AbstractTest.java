@@ -1,12 +1,14 @@
 package com.solvd.eshop;
 
 import com.solvd.eshop.utils.ConfigFileReader;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.ITestResult;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
@@ -21,13 +23,15 @@ import java.util.Date;
 import static com.solvd.eshop.utils.CapabilityFactory.getCapabilities;
 
 public abstract class AbstractTest {
-    private static final ThreadLocal<WebDriver> webDriver = new ThreadLocal<>();
+    private static final Logger LOGGER = LogManager.getLogger(AbstractTest.class);
+    private static final ThreadLocal<WebDriver> webDriver= new ThreadLocal<>();
 
     @BeforeMethod
     @Parameters({"browser"})
     public void beforeMethodSetup(String browser) throws MalformedURLException {
         WebDriver driver = new RemoteWebDriver(new URL(ConfigFileReader.getData("nodeUrl")), getCapabilities(browser));
         driver.get(ConfigFileReader.getData("baseUrl"));
+        LOGGER.info("21vek.by is opening");
         webDriver.set(driver);
     }
 
@@ -43,7 +47,8 @@ public abstract class AbstractTest {
 
     @AfterMethod(alwaysRun = true)
     public void afterMethodSetup(ITestResult result) throws Exception {
-        if (ITestResult.FAILURE == result.getStatus()) {
+        if (result.getStatus()==ITestResult.FAILURE) {
+            LOGGER.error(result.getName()+ " is failed");
             takeSnapShot(webDriver.get(), "/Users/solvd/IdeaProjects/eshop/screenshots/");
         }
         webDriver.get().close();
