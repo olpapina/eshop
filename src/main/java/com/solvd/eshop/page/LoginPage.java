@@ -3,30 +3,40 @@ package com.solvd.eshop.page;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
-
-public class LoginPage {
-    protected WebDriver driver;
-    private WebDriverWait waiter;
+public class LoginPage extends AbstractPage {
 
     @FindBy(xpath = "//*[contains(@class,'styles_bottomLinks__349w0')]//*[contains(text(),'Регистрация')]")
     private WebElement registrationButton;
 
+    @FindBy(css = "#login-email")
+    private WebElement emailField;
+
+    @FindBy(css = "#login-password")
+    private WebElement passwordField;
+
+    @FindBy(css = ".style_actions__2mIsz .style_baseActionButton__2LQYJ ")
+    private WebElement enterButton;
+
     public LoginPage(WebDriver driver) {
-        this.driver = driver;
-        this.waiter = new WebDriverWait(this.driver, Duration.ofMillis(1000));
-        PageFactory.initElements(driver, this);
+        super(driver);
     }
 
     public RegistrationPage clickRegistrationButton() {
-        waiter.until(ExpectedConditions.elementToBeClickable(registrationButton));
-        if (registrationButton.isDisplayed()) {
-            registrationButton.click();
-        }
+        elementClick(registrationButton, 5);
         return new RegistrationPage(driver);
+    }
+
+    public void typeLoginEmail(String email) {
+        typeText(emailField, email, 5);
+    }
+
+    public void typeLoginPassword(String password) {
+        typeText(passwordField, password, 5);
+    }
+
+    public HomePage clickEnterButton() {
+        elementClick(enterButton, 5);
+        return new HomePage(driver);
     }
 }

@@ -8,9 +8,9 @@ target/
 *.iws
 *.iml
 *.ipr
-
+screenshots/
 log/
-
+reports/
 ### Eclipse ###
 .apt_generated
 .classpath

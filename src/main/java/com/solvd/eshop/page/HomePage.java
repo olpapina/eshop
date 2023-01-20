@@ -3,50 +3,47 @@ package com.solvd.eshop.page;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
+public class HomePage extends AbstractPage {
 
-public class HomePage {
-        protected WebDriver driver;
-        private WebDriverWait waiter;
+    @FindBy(css = ".styles_reactButton__2olKd")
+    private WebElement cookieButton;
 
-        @FindBy(css = ".styles_reactButton__2olKd")
-        private WebElement cookieButton;
+    @FindBy(css = ".styles_userToolsToggler__imcSl")
+    private WebElement accountMenu;
 
-        @FindBy(css = ".styles_userToolsToggler__imcSl")
-        private WebElement accountMenu;
+    @FindBy(css = ".userToolsBtn")
+    private WebElement loginButton;
 
-        @FindBy(css = ".userToolsBtn")
-        private WebElement loginButton;
+    @FindBy(css = ".styles_userTools__2J7cp.undefined")
+    private WebElement accountMenuAfterLogin;
 
+    @FindBy(css = ".userToolsSubtitle")
+    private WebElement userToolsTitle;
 
-        public HomePage(WebDriver driver) {
-            this.driver = driver;
-            this.waiter = new WebDriverWait(this.driver,Duration.ofMillis(1000));
-            PageFactory.initElements(driver, this);
-        }
+    public HomePage(WebDriver driver) {
+        super(driver);
+    }
 
-        public void clickCookieButton() {
-            if (cookieButton.isDisplayed()) {
-                cookieButton.click();
-            }
-        }
+    public void clickCookieButton() {
+        elementClick(cookieButton, 0);
+    }
 
-        public void clickAccountMenu() {
-            if (accountMenu.isDisplayed()) {
-                accountMenu.click();
-            }
-        }
+    public void clickAccountMenu() {
+        elementClick(accountMenu, 0);
+    }
 
-        public LoginPage clickLoginButton() {
-            LoginPage loginPage = new LoginPage(driver);
-            waiter.until(ExpectedConditions.elementToBeClickable(loginButton));
-            if (loginButton.isDisplayed()) {
-                loginButton.click();
-            }
-            return loginPage;
-        }
+    public LoginPage clickLoginButton() {
+        elementClick(loginButton, 5);
+        return new LoginPage(driver);
+    }
+
+    public void clickAccountMenuAfterLogin() {
+        elementClick(accountMenuAfterLogin, 5);
+    }
+
+    public String getAccountInfo() {
+        waitIsClickable(5, userToolsTitle);
+        return getElementText(userToolsTitle);
+    }
 }
