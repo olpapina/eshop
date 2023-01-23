@@ -7,11 +7,13 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.safari.SafariOptions;
 
+import java.io.IOException;
+
 public class CapabilityFactory {
     private static final Logger LOGGER = LogManager.getLogger(CapabilityFactory.class);
     public static Capabilities capabilities;
 
-    public  static Capabilities getCapabilities(String browser) {
+    public  static Capabilities getCapabilities (String browser) throws IOException {
         switch (browser) {
             case "firefox":
                 capabilities = new FirefoxOptions();
@@ -23,9 +25,8 @@ public class CapabilityFactory {
                 capabilities = new SafariOptions();
                 break;
             default:
-                LOGGER.info("browser : " + browser + " is invalid, Launching Chrome as browser of choice..");
                 capabilities = new ChromeOptions();
-                break;
+                throw new IOException("browser : " + browser + " is invalid, Launching Chrome as browser of choice..");
         }
         return capabilities;
     }

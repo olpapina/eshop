@@ -14,6 +14,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.DateFormat;
@@ -48,8 +49,8 @@ public abstract class AbstractTest {
     @AfterMethod(alwaysRun = true)
     public void afterMethodSetup(ITestResult result) throws Exception {
         if (result.getStatus()==ITestResult.FAILURE) {
-            LOGGER.error(result.getName()+ " is failed");
-            takeSnapShot(webDriver.get(), "./eshop/screenshots/");
+            takeSnapShot(webDriver.get(), ConfigFileReader.getData("screenShotsPath"));
+            throw new IOException(result.getName()+ " is failed");
         }
         webDriver.get().close();
     }
